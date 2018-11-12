@@ -20,11 +20,24 @@ public class MasterBarang {
 	public MasterBarang() {
 
 	}
-	
+
+	public MasterBarang(String namaBarang, String unitSatu, 
+			int hasilKonversiUnitSatu, String unitDua, 
+			int hasilKonversiUnitDua, String unitStok, 
+			String statusBarang) {
+		this.namaBarang = namaBarang;
+		this.unitSatu = unitSatu;
+		this.hasilKonversiUnitSatu = hasilKonversiUnitSatu;
+		this.unitDua = unitDua;
+		this.hasilKonversiUnitDua = hasilKonversiUnitDua;
+		this.unitStok = unitStok;
+		this.statusBarang = statusBarang;
+	}
+
 	public MasterBarang(int kodeBarang, String namaBarang, 
-						String unitSatu, int hasilKonversiUnitSatu, 
-						String unitDua, int hasilKonversiUnitDua, 
-						String unitStok, String statusBarang) {
+			String unitSatu, int hasilKonversiUnitSatu, 
+			String unitDua, int hasilKonversiUnitDua, 
+			String unitStok, String statusBarang) {
 		this.kodeBarang = kodeBarang;
 		this.namaBarang = namaBarang;
 		this.unitSatu = unitSatu;
