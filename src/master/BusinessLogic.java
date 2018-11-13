@@ -18,11 +18,4 @@ public class BusinessLogic {
 			return false;
 		}
 	}
-	
-	public void validasiKodeBarang() {
-		// TODO 2 jika barang ada, maka showdata
-		// jika tidak ada, maka tampilkan barang yang dicari tidak ditemukan
-	}
-	
-	public void validasiNamaBarang() {}
 }

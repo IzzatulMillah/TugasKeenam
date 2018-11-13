@@ -5,13 +5,18 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		try {
-			showMenu();
-		} catch (CustomException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String ulang;
+		Scanner scan = new Scanner(System.in);
+		
+		do {
+			try {
+				showMenu();
+			} catch (CustomException e) {
+				e.printStackTrace();
+			}
+			System.out.print("Ingin mengulang lagi? (y/t) ");
+			ulang = scan.next();
+		} while(ulang.equalsIgnoreCase("y"));
 	}
 
 	public static void showMenu() throws CustomException {
@@ -22,7 +27,7 @@ public class Main {
 		BarangDaoImpl barangDaoImpl = new BarangDaoImpl();
 		UserInput userInput = new UserInput();
 
-		System.out.println("======== DATA MASTER BARANG ========");
+		System.out.println("\n======== DATA MASTER BARANG ========");
 		System.out.println("1. Tampilkan data master barang");
 		System.out.println("2. Tambah data master barang");
 		System.out.println("3. Ubah data master barang");
@@ -55,7 +60,5 @@ public class Main {
 			default :
 				break;
 		}
-		
-		scan.close();
 	}
 }

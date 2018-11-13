@@ -30,7 +30,7 @@ public class BarangDaoImpl implements BarangDao{
 		
 		String sql = "SELECT * FROM master_barang";
 		
-		System.out.println("****** Data Master Barang ******\n");
+		System.out.println("\n****** Data Master Barang ******\n");
 		
 		try {
 			statement = connection.createStatement();
@@ -80,7 +80,7 @@ public class BarangDaoImpl implements BarangDao{
 		
 		String sql = "SELECT * FROM master_barang WHERE status_barang = 'aktif'";
 		
-		System.out.println("****** Data Master Barang Aktif ******\n");
+		System.out.println("\n****** Data Master Barang Aktif ******\n");
 
 		try {
 			statement = connection.createStatement();
@@ -129,7 +129,7 @@ public class BarangDaoImpl implements BarangDao{
 		
 		String sql = "SELECT * FROM master_barang WHERE kode_barang = " + kodeBarang;
 		
-		System.out.println("****** Data Master Barang Berdasarkan Kode tertentu ******\n");
+		System.out.println("\n****** Data Master Barang Berdasarkan Kode tertentu ******\n");
 		
 		try {
 			statement = connection.createStatement();
@@ -178,7 +178,7 @@ public class BarangDaoImpl implements BarangDao{
 		
 		String sql = "SELECT * FROM master_barang WHERE nama_barang LIKE '%" + namaBarang + "%'";
 		
-		System.out.println("****** Data Master Barang Berdasarkan Nama tertentu ******\n");
+		System.out.println("\n****** Data Master Barang Berdasarkan Nama tertentu ******\n");
 		
 		try {
 			statement = connection.createStatement();
@@ -213,34 +213,6 @@ public class BarangDaoImpl implements BarangDao{
 	}
 
 	@Override
-	public int getIdBarang() {
-		Statement statement;
-		ResultSet resultSet;
-		
-		int kodeBarang;
-		
-		String sql = "SELECT * FROM master_barang";
-		
-		System.out.println("****** Data Master Barang ******\n");
-		
-		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-
-			while(resultSet.first()){
-				kodeBarang = resultSet.getInt("kode_barang");
-				return kodeBarang;
-			}
-			statement.close();
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}
-		return 0;
-	}
-
-	@Override
 	public String getStatusBarang(int kodeBarang) {
 		Statement statement;
 		ResultSet resultSet;
@@ -265,7 +237,6 @@ public class BarangDaoImpl implements BarangDao{
 			e.printStackTrace();
 			System.out.println(e);
 		}
-		
 		return null;
 	}
 }
