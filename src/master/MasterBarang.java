@@ -16,9 +16,14 @@ public class MasterBarang {
 	private int hasilKonversiUnitDua;
 
 	Connection connection = DatabaseConnection.getConnection();
+	BusinessLogic businessLogic = new BusinessLogic();
 
 	public MasterBarang() {
 
+	}
+	
+	public MasterBarang(int kodeBarang) {
+		this.kodeBarang = kodeBarang;
 	}
 
 	public MasterBarang(String namaBarang, String unitSatu, 
@@ -117,7 +122,7 @@ public class MasterBarang {
 				"hasil_konversi_unit_dua, unit_stok, " +
 				"status_barang)" + 
 				" VALUES ('"     + 
-				this.namaBarang + "','"    + this.unitSatu + "','"         + 
+				this.namaBarang            + "','" + this.unitSatu + "','" + 
 				this.hasilKonversiUnitSatu + "','" + this.unitDua + "','"  + 
 				this.hasilKonversiUnitDua  + "','" + this.unitStok + "','" +
 				this.statusBarang + "')";
@@ -137,11 +142,14 @@ public class MasterBarang {
 		PreparedStatement pStatement;
 
 		String sql = "UPDATE master_barang SET " +
-				"nama_barang = '" + this.namaBarang + "', unit_satu = '" + this.unitSatu +
-				"', hasil_konversi_unit_satu = '" + this.hasilKonversiUnitSatu + "', unit_dua = '" + this.unitDua +
-				"', hasil_konversi_unit_dua = '" + this.hasilKonversiUnitDua + "', unit_stok = '" + this.unitStok +
-				"status_barang = '" + this.statusBarang +
-				"' WHERE id = " + this.kodeBarang;
+				"nama_barang = '"                 + this.namaBarang            + "'," +
+				" unit_satu = '"                  + this.unitSatu              + "'," +
+				" hasil_konversi_unit_satu = '"   + this.hasilKonversiUnitSatu + "'," +
+				" unit_dua = '"                   + this.unitDua               + "'," +
+				" hasil_konversi_unit_dua = '"    + this.hasilKonversiUnitDua  + "'," +
+				" unit_stok = '"                  + this.unitStok              + "'," +
+				"status_barang = '"               + this.statusBarang          + "'"  +
+				" WHERE kode_barang = " + this.kodeBarang;
 
 		try {
 			pStatement = connection.prepareStatement(sql);
@@ -154,18 +162,26 @@ public class MasterBarang {
 		}
 	}
 
-	public void deleteBarang() {
+	public void deleteBarang(int kode) {
 		PreparedStatement pStatement;
-		String sql = "DELETE FROM master_barang WHERE id = '" + this.kodeBarang + "'";
+		boolean status;
+		
+		status = businessLogic.validasiBarangAktif(kode);
+		
+		String sql = "DELETE FROM master_barang WHERE kode_barang = " + this.kodeBarang;
+		
+		if(status == true) {
+			System.out.println("Status Barang aktif, tidak dapat dihapus.");
+		} else {
+			try {
+				pStatement = connection.prepareStatement(sql);
+				pStatement.execute();
 
-		try {
-			pStatement = connection.prepareStatement(sql);
-			pStatement.execute();
-
-			System.out.println("Hapus data master barang berhasil");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println(e);
+				System.out.println("Hapus data master barang berhasil");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e);
+			}
 		}
 	}
 }

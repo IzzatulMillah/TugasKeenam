@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 public class DatabaseConnection {
 	static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static String DB_URL = "jdbc:mysql://192.168.23.220:3306/database_master" + 
-	"?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Jakarta";
+						"?useSSL=false&useJDBCCompliantTimezoneShift=true&use" +
+						"LegacyDatetimeCode=false&serverTimezone=Asia/Jakarta";
 	static String USER = "sofco";
 	static String PASS = "s3234";
 
@@ -26,10 +27,5 @@ public class DatabaseConnection {
 			System.out.println("Koneksi ke database gagal.");
 		}
 		return connection;
-	}
-	
-	public static void main(String[] args) {
-		DatabaseConnection d = new DatabaseConnection();
-		System.out.println(d);
 	}
 }
