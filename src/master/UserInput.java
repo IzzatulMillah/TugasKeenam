@@ -64,7 +64,7 @@ public class UserInput {
 		scan.close();
 	}
 	
-	public void delete() {
+	public void delete() throws CustomException {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("===== HAPUS DATA MASTER BARANG =====");
@@ -75,5 +75,33 @@ public class UserInput {
 		masterBarang.deleteBarang(inputId);
 		
 		scan.close();
+	}
+	
+	public void search() throws CustomException {
+		
+		BarangDaoImpl barangDaoImpl = new BarangDaoImpl();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String namaBarang;
+		int kodeBarang;
+		
+		System.out.println("===== PENCARIAN DATA MASTER BARANG =====");
+		System.out.println("1. Berdasarkan kode barang");
+		System.out.println("2. Berdasarkan nama barang");
+		System.out.print("Pilih data yang akan dimasukkan : ");
+		int inputUser = scan.nextInt();
+		
+		if (inputUser == 1) {
+			System.out.print("Masukkan kode barang : ");
+			kodeBarang = scan.nextInt();
+			barangDaoImpl.searchBarang(kodeBarang);
+		} else if (inputUser == 2) {
+			System.out.print("Masukkan keyword barang : ");
+			namaBarang = scan.next();
+			barangDaoImpl.searchBarang(namaBarang);
+		} else {
+			throw new CustomException("Input tidak ada di menu.");
+		}
 	}
 }

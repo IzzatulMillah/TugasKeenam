@@ -115,7 +115,7 @@ public class BarangDaoImpl implements BarangDao{
 	}
 
 	@Override
-	public void getBarang(int kodeBarang) {
+	public void searchBarang(int kodeBarang) {
 		Statement statement;
 		ResultSet resultSet;
 		
@@ -164,7 +164,7 @@ public class BarangDaoImpl implements BarangDao{
 	}
 
 	@Override
-	public void getBarang(String namaBarang) {
+	public void searchBarang(String namaBarang) {
 		Statement statement;
 		ResultSet resultSet;
 		

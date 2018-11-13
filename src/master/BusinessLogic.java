@@ -9,8 +9,6 @@ public class BusinessLogic {
 	}
 	
 	public boolean validasiBarangAktif(int kodeBarang) {
-		// TODO 1 ambil status barang, boleh string atau boolean.
-		// kalau aktif, atau true, maka tidak bisa dihapus
 		String status;
 		
 		status = barangDaoImpl.getStatusBarang(kodeBarang);

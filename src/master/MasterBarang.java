@@ -162,7 +162,7 @@ public class MasterBarang {
 		}
 	}
 
-	public void deleteBarang(int kode) {
+	public void deleteBarang(int kode) throws CustomException{
 		PreparedStatement pStatement;
 		boolean status;
 		
@@ -171,7 +171,7 @@ public class MasterBarang {
 		String sql = "DELETE FROM master_barang WHERE kode_barang = " + this.kodeBarang;
 		
 		if(status == true) {
-			System.out.println("Status Barang aktif, tidak dapat dihapus.");
+			throw new CustomException("Status Barang aktif, tidak dapat dihapus.");
 		} else {
 			try {
 				pStatement = connection.prepareStatement(sql);
