@@ -2,11 +2,11 @@ package master;
 
 import java.util.Scanner;
 
-public class UserInput {
-	
-	public UserInput() {}
-	
-	public void insert() {
+public class PresentationLayer {
+
+	public PresentationLayer() {}
+
+	public Barang insert() {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("===== INPUT DATA MASTER BARANG =====");
@@ -25,21 +25,21 @@ public class UserInput {
 		System.out.print("Status Barang : ");
 		String inputStatusBarang = scan.next();
 
-		MasterBarang masterBarang = new MasterBarang(inputNama, inputUnitSatu, 
+		scan.close();
+
+		Barang masterBarang = new Barang(null, inputNama, inputUnitSatu, 
 				inputKonversiSatu, inputUnitDua, 
 				inputKonversiDua, inputUnitStok, 
 				inputStatusBarang);
-		masterBarang.insertBarang();
-		
-		scan.close();
+		return masterBarang;
 	}
-	
-	public void update() {
+
+	public Barang update() {
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("===== UPDATE DATA MASTER BARANG =====");
 		System.out.print("Kode Barang   : ");
-		int inputKode = scan.nextInt();
+		String inputKode = scan.next();
 		System.out.print("Nama Barang   : ");
 		String inputNama = scan.next();
 		System.out.print("Unit Satu     : ");
@@ -54,54 +54,97 @@ public class UserInput {
 		String inputUnitStok = scan.next();
 		System.out.print("Status Barang : ");
 		String inputStatusBarang = scan.next();
-		
-		MasterBarang masterBarang = new MasterBarang(inputKode, inputNama, 
+
+		scan.close();
+
+		Barang masterBarang = new Barang(inputKode, inputNama, 
 				inputUnitSatu, inputKonversiSatu, 
 				inputUnitDua, inputKonversiDua, 
 				inputUnitStok, inputStatusBarang);
-		masterBarang.updateBarang();
-		
-		scan.close();
+		return masterBarang;
 	}
-	
-	public void delete() throws CustomException {
+
+	public Barang delete() throws CustomException {
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("===== HAPUS DATA MASTER BARANG =====");
 		System.out.print("Masukkan kode barang : ");
-		int inputId = scan.nextInt();
-		
-		MasterBarang masterBarang = new MasterBarang(inputId);
-		masterBarang.deleteBarang(inputId);
-		
+		String inputId = scan.next();
+
 		scan.close();
+
+		Barang masterBarang = new Barang(inputId, null, null, 0, null, 0, null, null);
+		return masterBarang;
 	}
-	
-	public void search() throws CustomException {
-		
-		BarangDaoImpl barangDaoImpl = new BarangDaoImpl();
-		
+
+	public String search() throws CustomException {
 		Scanner scan = new Scanner(System.in);
-		
+
 		String namaBarang;
-		int kodeBarang;
-		
+		String kodeBarang;
+
 		System.out.println("===== PENCARIAN DATA MASTER BARANG =====");
 		System.out.println("1. Berdasarkan kode barang");
 		System.out.println("2. Berdasarkan nama barang");
 		System.out.print("Pilih data yang akan dimasukkan : ");
 		int inputUser = scan.nextInt();
-		
+
 		if (inputUser == 1) {
 			System.out.print("Masukkan kode barang : ");
-			kodeBarang = scan.nextInt();
-			barangDaoImpl.searchBarang(kodeBarang);
+			kodeBarang = scan.next();
+			scan.close();
+			return kodeBarang;
 		} else if (inputUser == 2) {
 			System.out.print("Masukkan keyword barang : ");
 			namaBarang = scan.next();
-			barangDaoImpl.searchBarang(namaBarang);
+			scan.close();
+			return namaBarang;
 		} else {
+			scan.close();
 			throw new CustomException("Input tidak ada di menu.");
 		}
+	}
+
+	public Bagian insertBagian() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== INPUT DATA MASTER BAGIAN =====");
+		System.out.print("Kode Bagian   : ");
+		String inputKode = scan.next();
+		System.out.print("Nama Bagian   : ");
+		String inputNama = scan.next();
+
+		scan.close();
+
+		Bagian bagian = new Bagian(inputKode, inputNama);
+		return bagian;
+	}
+
+	public Bagian updateBagian() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== INPUT DATA MASTER BAGIAN =====");
+		System.out.print("Kode Bagian   : ");
+		String inputKode = scan.next();
+		System.out.print("Nama Bagian   : ");
+		String inputNama = scan.next();
+
+		scan.close();
+
+		Bagian bagian = new Bagian(inputKode, inputNama);
+		return bagian;
+	}
+
+	public Bagian deleteBagian() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== HAPUS DATA MASTER BAGIAN =====");
+		System.out.print("Masukkan kode bagian : ");
+		String inputKode = scan.next();
+
+		scan.close();
+
+		Bagian bagian = new Bagian(inputKode, null);
+		return bagian;
 	}
 }

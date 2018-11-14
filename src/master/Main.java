@@ -17,6 +17,8 @@ public class Main {
 			System.out.print("Ingin mengulang lagi? (y/t) ");
 			ulang = scan.next();
 		} while(ulang.equalsIgnoreCase("y"));
+		
+		scan.close();
 	}
 
 	public static void showMenu() throws CustomException {
@@ -24,9 +26,6 @@ public class Main {
 		
 		Scanner scan = new Scanner(System.in);
 		
-		BarangDaoImpl barangDaoImpl = new BarangDaoImpl();
-		UserInput userInput = new UserInput();
-
 		System.out.println("\n======== DATA MASTER BARANG ========");
 		System.out.println("1. Tampilkan data master barang");
 		System.out.println("2. Tambah data master barang");
@@ -40,22 +39,16 @@ public class Main {
 
 		switch(pilih) {
 			case 1 :
-				barangDaoImpl.getAllBarang();
 				break;
 			case 2 :
-				userInput.insert();
 				break;
 			case 3 :
-				userInput.update();
 				break;
 			case 4 :
-				userInput.delete();
 				break;
 			case 5 :
-				barangDaoImpl.getAllBarangAktif();
 				break;
 			case 6 :
-				userInput.search();
 				break;
 			default :
 				break;
