@@ -61,7 +61,7 @@ public class Bagian {
 		PreparedStatement pStatement;
 
 		String sql = "UPDATE master_bagian SET " +
-				"nama_bagian = '" + this.namaBagian + "'," +
+				"nama_bagian = '" + this.namaBagian + "'"+
 				" WHERE kode_bagian = '" + this.kodeBagian + "'";
 
 		try {
@@ -75,13 +75,13 @@ public class Bagian {
 		}
 	}
 
-	public void deleteBarang(String kode) throws CustomException, SQLException{
+	public void deleteBagian() throws CustomException, SQLException{
 		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 		Connection connection = databaseConnection.getConnection();
 		
 		PreparedStatement pStatement;
 
-		String sql = "DELETE FROM master_bagian WHERE kode_barang = '" + this.kodeBagian + "'";
+		String sql = "DELETE FROM master_bagian WHERE kode_bagian = '" + this.kodeBagian + "'";
 		try {
 			pStatement = connection.prepareStatement(sql);
 			pStatement.execute();

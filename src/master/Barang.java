@@ -14,8 +14,6 @@ public class Barang {
 
 	private double hasilKonversiUnit1;
 	private double hasilKonversiUnit2;
-	
-	BusinessLogic businessLogic = new BusinessLogic();
 
 	public Barang() {
 
@@ -150,7 +148,7 @@ public class Barang {
 		}
 	}
 
-	public void deleteBarang(String kode) throws CustomException, SQLException{
+	public void deleteBarang() throws CustomException, SQLException{
 		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 		Connection connection = databaseConnection.getConnection();
 		

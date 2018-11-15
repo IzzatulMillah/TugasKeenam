@@ -4,58 +4,58 @@ import java.util.Scanner;
 
 public class PresentationLayer {
 
-	public PresentationLayer() {}
+	public PresentationLayer() {
+		
+	}
 
-	public Barang insert() {
+	public Barang insertBarang() {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("===== INPUT DATA MASTER BARANG =====");
+		System.out.print("Kode Barang   : ");
+		String inputKode = scan.nextLine();
 		System.out.print("Nama Barang   : ");
-		String inputNama = scan.next();
+		String inputNama = scan.nextLine();
 		System.out.print("Unit Satu     : ");
 		String inputUnitSatu = scan.next();
 		System.out.print("Konversi Satu : ");
-		int inputKonversiSatu = scan.nextInt();
+		double inputKonversiSatu = scan.nextDouble();
 		System.out.print("Unit Dua      : ");
 		String inputUnitDua = scan.next();
 		System.out.print("Konversi Dua  : ");
-		int inputKonversiDua = scan.nextInt();
+		double inputKonversiDua = scan.nextDouble();
 		System.out.print("Unit Stok     : ");
 		String inputUnitStok = scan.next();
-		System.out.print("Status Barang : ");
+		System.out.print("Aktif (y/n)   : ");
 		String inputStatusBarang = scan.next();
-
-		scan.close();
-
-		Barang masterBarang = new Barang(null, inputNama, inputUnitSatu, 
-				inputKonversiSatu, inputUnitDua, 
-				inputKonversiDua, inputUnitStok, 
-				inputStatusBarang);
+		
+		Barang masterBarang = new Barang(inputKode, inputNama, 
+										 inputUnitSatu, inputKonversiSatu, 
+										 inputUnitDua, inputKonversiDua, 
+										 inputUnitStok, inputStatusBarang);
 		return masterBarang;
 	}
 
-	public Barang update() {
+	public Barang updateBarang() {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("===== UPDATE DATA MASTER BARANG =====");
 		System.out.print("Kode Barang   : ");
-		String inputKode = scan.next();
+		String inputKode = scan.nextLine();
 		System.out.print("Nama Barang   : ");
-		String inputNama = scan.next();
+		String inputNama = scan.nextLine();
 		System.out.print("Unit Satu     : ");
-		String inputUnitSatu = scan.next();
+		String inputUnitSatu = scan.nextLine();
 		System.out.print("Konversi Satu : ");
 		int inputKonversiSatu = scan.nextInt();
 		System.out.print("Unit Dua      : ");
-		String inputUnitDua = scan.next();
+		String inputUnitDua = scan.nextLine();
 		System.out.print("Konversi Dua  : ");
 		int inputKonversiDua = scan.nextInt();
 		System.out.print("Unit Stok     : ");
-		String inputUnitStok = scan.next();
-		System.out.print("Status Barang : ");
-		String inputStatusBarang = scan.next();
-
-		scan.close();
+		String inputUnitStok = scan.nextLine();
+		System.out.print("Aktif (y/n)   : ");
+		String inputStatusBarang = scan.nextLine();
 
 		Barang masterBarang = new Barang(inputKode, inputNama, 
 				inputUnitSatu, inputKonversiSatu, 
@@ -64,20 +64,18 @@ public class PresentationLayer {
 		return masterBarang;
 	}
 
-	public Barang delete() throws CustomException {
+	public Barang deleteBarang() throws CustomException {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("===== HAPUS DATA MASTER BARANG =====");
 		System.out.print("Masukkan kode barang : ");
 		String inputId = scan.next();
 
-		scan.close();
-
 		Barang masterBarang = new Barang(inputId, null, null, 0, null, 0, null, null);
 		return masterBarang;
 	}
 
-	public String search() throws CustomException {
+	public String searchBarang() throws CustomException {
 		Scanner scan = new Scanner(System.in);
 
 		String namaBarang;
@@ -92,15 +90,12 @@ public class PresentationLayer {
 		if (inputUser == 1) {
 			System.out.print("Masukkan kode barang : ");
 			kodeBarang = scan.next();
-			scan.close();
 			return kodeBarang;
 		} else if (inputUser == 2) {
 			System.out.print("Masukkan keyword barang : ");
-			namaBarang = scan.next();
-			scan.close();
+			namaBarang = scan.nextLine();
 			return namaBarang;
 		} else {
-			scan.close();
 			throw new CustomException("Input tidak ada di menu.");
 		}
 	}
@@ -110,12 +105,10 @@ public class PresentationLayer {
 
 		System.out.println("===== INPUT DATA MASTER BAGIAN =====");
 		System.out.print("Kode Bagian   : ");
-		String inputKode = scan.next();
+		String inputKode = scan.nextLine();
 		System.out.print("Nama Bagian   : ");
-		String inputNama = scan.next();
-
-		scan.close();
-
+		String inputNama = scan.nextLine();
+		
 		Bagian bagian = new Bagian(inputKode, inputNama);
 		return bagian;
 	}
@@ -125,11 +118,9 @@ public class PresentationLayer {
 
 		System.out.println("===== INPUT DATA MASTER BAGIAN =====");
 		System.out.print("Kode Bagian   : ");
-		String inputKode = scan.next();
+		String inputKode = scan.nextLine();
 		System.out.print("Nama Bagian   : ");
-		String inputNama = scan.next();
-
-		scan.close();
+		String inputNama = scan.nextLine();
 
 		Bagian bagian = new Bagian(inputKode, inputNama);
 		return bagian;
@@ -142,9 +133,42 @@ public class PresentationLayer {
 		System.out.print("Masukkan kode bagian : ");
 		String inputKode = scan.next();
 
-		scan.close();
-
 		Bagian bagian = new Bagian(inputKode, null);
 		return bagian;
+	}
+	
+	public Transaksi insertTransaksi() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== INPUT DATA TRANSAKSI =====");
+		System.out.print("Nomor Bon           : ");
+		int inputNomorBon = scan.nextInt();
+		System.out.print("Tanggal Bon         : ");
+		String inputNama = scan.nextLine();
+		System.out.print("Kode Bagian Peminta : ");
+		String inputKodeBagian = scan.nextLine();
+		System.out.print("Keterangan          : ");
+		String inputKeterangan = scan.nextLine();
+
+		Transaksi pembelian = new Transaksi(inputNomorBon, inputNama, inputKodeBagian, inputKeterangan);
+		return pembelian;
+	}
+	
+	public DetailTransaksi insertDetail() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== INPUT DETAIL TRANSAKSI =====");
+		System.out.print("Nomor Bon           : ");
+		int inputNomorBon = scan.nextInt();
+		System.out.print("Kode Barang         : ");
+		String inputKodeBarang = scan.next();
+		System.out.print("Jumlah dipesan : ");
+		double inputJumlahPesan = scan.nextDouble();
+		System.out.print("Unit          : ");
+		String inputUnit = scan.next();
+		
+		
+		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, inputJumlahPesan, inputUnit, 0, null);
+		return dPembelian;
 	}
 }

@@ -23,25 +23,21 @@ public class BagianDao {
 
 		String sql = "SELECT * FROM master_bagian";
 
-		System.out.println("\n****** Data Master Barang ******\n");
+		System.out.println("\n****** Data Master Bagian ******\n");
+		
+		statement = connection.createStatement();
+		resultSet = statement.executeQuery(sql);
 
-		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
+		while(resultSet.next()){
+			kodeBagian = resultSet.getString("kode_bagian");
+			namaBagian = resultSet.getString("nama_bagian");
 
-			while(resultSet.next()){
-				kodeBagian = resultSet.getString("kode_bagian");
-				namaBagian = resultSet.getString("nama_bagian");
-
-				System.out.println("Kode Barang      : " + kodeBagian);
-				System.out.println("Nama Barang      : " + namaBagian);
-				System.out.println("--------------------------------------------");
-			}
-			statement.close();
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println(e);
+			System.out.println("Kode Bagian      : " + kodeBagian);
+			System.out.println("Nama Bagian      : " + namaBagian);
+			System.out.println("--------------------------------------------");
 		}
+		
+		statement.close();
+		resultSet.close();
 	}
 }
