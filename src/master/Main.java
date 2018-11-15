@@ -28,7 +28,6 @@ public class Main {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
 	}
 
 	public static void showMenu() throws CustomException, InputMismatchException, SQLException{
@@ -53,7 +52,7 @@ public class Main {
 				showMenuBagian();
 				break;
 			case 3 :
-				showMenuTransaksiPermintaan();
+				showMenuTransaksi();
 				break;
 			default :
 				throw new CustomException("Maaf, pilihan Anda tidak ada di Menu Utama");
@@ -145,31 +144,31 @@ public class Main {
 		}
 	}
 
-	public static void showMenuTransaksiPermintaan() throws CustomException {
-		PresentationLayer presentationLayer = new PresentationLayer();
+	public static void showMenuTransaksi() throws CustomException {
 		int pilih;
 
 		Scanner scan = new Scanner(System.in);
 
-		System.out.println("\n======== DATA MASTER BAGIAN ========");
-		System.out.println("1. DATA MASTER BARANG");
-		System.out.println("2. DATA MASTER BAGIAN");
-		System.out.println("3. TRANSAKSI PERMINTAAN PEMBELIAN ");
+		System.out.println("\n======== DATA TRANSAKSI PERMINTAAN PEMBELIAN ========");
+		System.out.println("1. DATA PERMINTAAN PEMBELIAN");
+		System.out.println("2. DATA DETAIL PERMINTAAN PEMBELIAN");
 		System.out.print("==> Masukkan pilihan : ");
 
 		pilih = scan.nextInt();
 
 		switch(pilih) {
 		case 1 :
+			showPermintaan();
 			break;
 		case 2 :
-			break;
-		case 3 :
-			break;
-		case 4 :
+			showDetail();
 			break;
 		default :
 			throw new CustomException("Maaf, pilihan Anda tidak ada di Menu Utama");
 		}
 	}
+	
+	public static void showPermintaan() {}
+	
+	public static void showDetail() {}
 }

@@ -158,17 +158,72 @@ public class PresentationLayer {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("===== INPUT DETAIL TRANSAKSI =====");
-		System.out.print("Nomor Bon           : ");
+		System.out.print("Nomor Bon      : ");
 		int inputNomorBon = scan.nextInt();
-		System.out.print("Kode Barang         : ");
+		System.out.print("Kode Barang    : ");
 		String inputKodeBarang = scan.next();
 		System.out.print("Jumlah dipesan : ");
 		double inputJumlahPesan = scan.nextDouble();
-		System.out.print("Unit          : ");
+		System.out.print("Unit           : ");
 		String inputUnit = scan.next();
 		
+		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, inputJumlahPesan, inputUnit, 0, null);
+		return dPembelian;
+	}
+	
+	public Transaksi updateTransaksi() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== UPDATE DATA TRANSAKSI =====");
+		System.out.print("Nomor Bon           : ");
+		int inputNomorBon = scan.nextInt();
+		System.out.print("Tanggal Bon         : ");
+		String inputNama = scan.nextLine();
+		System.out.print("Kode Bagian Peminta : ");
+		String inputKodeBagian = scan.nextLine();
+		System.out.print("Keterangan          : ");
+		String inputKeterangan = scan.nextLine();
+
+		Transaksi pembelian = new Transaksi(inputNomorBon, inputNama, inputKodeBagian, inputKeterangan);
+		return pembelian;
+	}
+	
+	public DetailTransaksi updateDetail() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== UPDATE DETAIL TRANSAKSI =====");
+		System.out.print("Nomor Bon      : ");
+		int inputNomorBon = scan.nextInt();
+		System.out.print("Kode Barang    : ");
+		String inputKodeBarang = scan.next();
+		System.out.print("Jumlah dipesan : ");
+		double inputJumlahPesan = scan.nextDouble();
+		System.out.print("Unit           : ");
+		String inputUnit = scan.next();
 		
 		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, inputJumlahPesan, inputUnit, 0, null);
+		return dPembelian;
+	}
+	
+	public Transaksi deleteTransaksi() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== DELETE DATA TRANSAKSI =====");
+		System.out.print("Nomor Bon           : ");
+		int inputNomorBon = scan.nextInt();
+
+		Transaksi pembelian = new Transaksi(inputNomorBon, null, null, null);
+		return pembelian;
+	}
+	
+	public DetailTransaksi deleteDetail() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("===== DELETE DETAIL TRANSAKSI =====");
+		System.out.print("Nomor Bon      : ");
+		int inputNomorBon = scan.nextInt();
+		
+		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, null, 0, null, 0, null);
 		return dPembelian;
 	}
 }
