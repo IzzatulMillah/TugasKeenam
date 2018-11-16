@@ -21,15 +21,21 @@ public class BlBarang {
 	}
 	
 	public void deleteDataBarang(Barang barang) throws CustomException, SQLException {
-		barang.deleteBarang();
-		System.out.println("hapus barang BL berhasil");
+		boolean status;
+		status = validasiBarangAktif(barang.getKodeBarang());
+		if(status == true) {
+			throw new CustomException("barang Aktif tidak dapat dihapus");
+		} else {
+			barang.deleteBarang();
+			System.out.println("hapus barang BL berhasil");
+		}
 	}
 	
 	public boolean validasiBarangAktif(String kodeBarang) throws SQLException {
 		String status;
 		
 		status = barangDao.getStatusBarang(kodeBarang);
-		if(status.equalsIgnoreCase("aktif")) {
+		if(status.equalsIgnoreCase("y")) {
 			return true;
 		} else {
 			return false;

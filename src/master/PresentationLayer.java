@@ -143,14 +143,15 @@ public class PresentationLayer {
 		System.out.println("===== INPUT DATA TRANSAKSI =====");
 		System.out.print("Nomor Bon           : ");
 		int inputNomorBon = scan.nextInt();
+		scan.nextLine();
 		System.out.print("Tanggal Bon         : ");
-		String inputNama = scan.nextLine();
+		String inputTanggal = scan.nextLine();
 		System.out.print("Kode Bagian Peminta : ");
 		String inputKodeBagian = scan.nextLine();
 		System.out.print("Keterangan          : ");
 		String inputKeterangan = scan.nextLine();
 
-		Transaksi pembelian = new Transaksi(inputNomorBon, inputNama, inputKodeBagian, inputKeterangan);
+		Transaksi pembelian = new Transaksi(inputNomorBon, inputTanggal, inputKodeBagian, inputKeterangan);
 		return pembelian;
 	}
 	
@@ -167,7 +168,8 @@ public class PresentationLayer {
 		System.out.print("Unit           : ");
 		String inputUnit = scan.next();
 		
-		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, inputJumlahPesan, inputUnit, 0, null);
+		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, 
+				inputJumlahPesan, inputUnit, 0, null);
 		return dPembelian;
 	}
 	
@@ -177,6 +179,7 @@ public class PresentationLayer {
 		System.out.println("===== UPDATE DATA TRANSAKSI =====");
 		System.out.print("Nomor Bon           : ");
 		int inputNomorBon = scan.nextInt();
+		scan.nextLine();
 		System.out.print("Tanggal Bon         : ");
 		String inputNama = scan.nextLine();
 		System.out.print("Kode Bagian Peminta : ");
@@ -201,7 +204,8 @@ public class PresentationLayer {
 		System.out.print("Unit           : ");
 		String inputUnit = scan.next();
 		
-		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, inputJumlahPesan, inputUnit, 0, null);
+		DetailTransaksi dPembelian = new DetailTransaksi(inputNomorBon, inputKodeBarang, 
+				inputJumlahPesan, inputUnit, 0, null);
 		return dPembelian;
 	}
 	

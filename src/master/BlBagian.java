@@ -18,4 +18,5 @@ public class BlBagian {
 		bagian.deleteBagian();
 		System.out.println("hapus barang BL berhasil");
 	}
+	
 }

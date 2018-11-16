@@ -10,24 +10,24 @@ public class Main {
 		String ulang;
 		Scanner scan = new Scanner(System.in);
 
-//		do {
-//			try {
-//				showMenu();
-//			} catch (CustomException e) {
-//				System.out.println(e);
-//			} catch (InputMismatchException e) {
-//				System.out.println("Maaf inputan anda tidak sesuai");
-//			}
-//			System.out.print("Ingin mengulang lagi? (y/t) ");
-//			ulang = scan.next();
-//		} while(ulang.equalsIgnoreCase("y"));
-		try{
-			TransaksiDAO transaksiDAO = new TransaksiDAO();
-			transaksiDAO.getAllHeader();
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		do {
+			try {
+				showMenu();
+			} catch (CustomException e) {
+				System.out.println(e);
+			} catch (InputMismatchException e) {
+				System.out.println("Maaf inputan anda tidak sesuai");
+			}
+			System.out.print("Ingin mengulang lagi? (y/t) ");
+			ulang = scan.next();
+		} while(ulang.equalsIgnoreCase("y"));
+		
+//		try{
+//			TransaksiDAO transaksiDAO = new TransaksiDAO();
+//			transaksiDAO.getAllHeader();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public static void showMenu() throws CustomException, InputMismatchException, SQLException{
@@ -78,7 +78,7 @@ public class Main {
 		System.out.println("1. Tampilkan Data Master Barang");
 		System.out.println("2. Tambah Data Master Barang");
 		System.out.println("3. Ubah Data Master Barang");
-		System.out.println("4. hapus Data Master Barang");
+		System.out.println("4. Hapus Data Master Barang");
 		System.out.print("==> Masukkan pilihan : ");
 
 		pilih = scan.nextInt();
@@ -117,7 +117,7 @@ public class Main {
 		System.out.println("1. Tampilkan Data Master Bagian");
 		System.out.println("2. Tambah Data Master Bagian");
 		System.out.println("3. Ubah Data Master Bagian");
-		System.out.println("4. hapus Data Master Bagian");
+		System.out.println("4. Hapus Data Master Bagian");
 		System.out.print("==> Masukkan pilihan : ");
 
 		pilih = scan.nextInt();
@@ -144,7 +144,7 @@ public class Main {
 		}
 	}
 
-	public static void showMenuTransaksi() throws CustomException {
+	public static void showMenuTransaksi() throws CustomException, SQLException {
 		int pilih;
 
 		Scanner scan = new Scanner(System.in);
@@ -168,7 +168,81 @@ public class Main {
 		}
 	}
 	
-	public static void showPermintaan() {}
+	public static void showPermintaan() throws SQLException, CustomException {
+		Transaksi transaksi;
+		PresentationLayer presentationLayer = new PresentationLayer();
+		BlTransaksi blTransaksi = new BlTransaksi();
+		int pilih;
+
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("\n======== DATA PERMINTAAN PEMBELIAN ========");
+		System.out.println("1. Tampilkan Data Permintaan Pembelian");
+		System.out.println("2. Tambah Data Permintaan Pembelian");
+		System.out.println("3. Ubah Data Permintaan Pembelian");
+		System.out.println("4. Hapus Data Permintaan Pembelian");
+		System.out.print("==> Masukkan pilihan : ");
+
+		pilih = scan.nextInt();
+
+		switch(pilih) {
+		case 1 :
+			TransaksiDAO transaksiDAO = new TransaksiDAO();
+			transaksiDAO.getAllTransaksi();
+			break;
+		case 2 :
+			transaksi = presentationLayer.insertTransaksi();
+			blTransaksi.input(transaksi);
+			break;
+		case 3 :
+			transaksi = presentationLayer.insertTransaksi();
+			blTransaksi.update(transaksi);
+			break;
+		case 4 :
+			transaksi = presentationLayer.insertTransaksi();
+			blTransaksi.delete(transaksi);
+			break;
+		default :
+			throw new CustomException("Maaf, pilihan Anda tidak ada di Menu Utama");
+		}
+	}
 	
-	public static void showDetail() {}
+	public static void showDetail() throws SQLException, CustomException {
+		DetailTransaksi detailTransaksi;
+		PresentationLayer presentationLayer = new PresentationLayer();
+		BlTransaksi blTransaksi = new BlTransaksi();
+		int pilih;
+
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("\n====== DATA DETAIL PERMINTAAN PEMBELIAN ======");
+		System.out.println("1. Tampilkan Detail Permintaan Pembelian");
+		System.out.println("2. Tambah Detail Permintaan Pembelian");
+		System.out.println("3. Ubah Detail Permintaan Pembelian");
+		System.out.println("4. Hapus Detail Permintaan Pembelian");
+		System.out.print("==> Masukkan pilihan : ");
+
+		pilih = scan.nextInt();
+		
+		switch(pilih) {
+		case 1 :
+			TransaksiDAO transaksiDAO = new TransaksiDAO();
+			transaksiDAO.getAllHeaderDetail();
+			break;
+		case 2 :
+			detailTransaksi = presentationLayer.insertDetail();
+			blTransaksi.inputDetail(detailTransaksi);
+			break;
+		case 3 :
+			detailTransaksi = presentationLayer.updateDetail();
+			blTransaksi.updateDetail(detailTransaksi);
+			break;
+		case 4 :
+			detailTransaksi = presentationLayer.deleteDetail();
+			blTransaksi.deleteDetail(detailTransaksi);
+			break;
+		default :
+			throw new CustomException("Maaf, pilihan Anda tidak ada di Menu Utama");
+		}
+	}
 }
