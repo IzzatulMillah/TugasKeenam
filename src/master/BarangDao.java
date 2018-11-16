@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BarangDao{
 	
@@ -11,21 +13,13 @@ public class BarangDao{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void getAllBarang() throws SQLException {
+	public List<Barang> getAllBarang() throws SQLException {
 		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 		Connection connection = databaseConnection.getConnection();
+		List<Barang> listBarang = new ArrayList<>();
 		
 		Statement statement;
 		ResultSet resultSet;
-		
-		String namaBarang;
-		String unitSatu;
-		String unitDua;
-		String unitStok;
-		String statusBarang;
-		String kodeBarang;
-		double hasilKonversiUnitSatu;
-		double hasilKonversiUnitDua;
 		
 		String sql = "SELECT * FROM master_barang";
 		
@@ -36,31 +30,25 @@ public class BarangDao{
 			resultSet = statement.executeQuery(sql);
 
 			while(resultSet.next()){
-				kodeBarang = resultSet.getString("kode_barang");
-				namaBarang = resultSet.getString("nama_barang");
-				unitSatu = resultSet.getString("unit1");
-				hasilKonversiUnitSatu = resultSet.getDouble("konversi_unit1");
-				unitDua = resultSet.getString("unit2");
-				hasilKonversiUnitDua = resultSet.getDouble("konversi_unit2");
-				unitStok = resultSet.getString("unit_stok");
-				statusBarang = resultSet.getString("aktif");
+				String kodeBarang = resultSet.getString("kode_barang");
+				String namaBarang = resultSet.getString("nama_barang");
+				String unit1 = resultSet.getString("unit1");
+				double hasilKonversiunit1 = resultSet.getDouble("konversi_unit1");
+				String unit2 = resultSet.getString("unit2");
+				double hasilKonversiunit2 = resultSet.getDouble("konversi_unit2");
+				String unitStok = resultSet.getString("unit_stok");
+				String statusBarang = resultSet.getString("aktif");
 				
-				System.out.println("Kode Barang      : " + kodeBarang);
-				System.out.println("Nama Barang      : " + namaBarang);
-				System.out.println("Unit Satu        : " + unitSatu);
-				System.out.println("Hasil konversi 1 : " + hasilKonversiUnitSatu);
-				System.out.println("Unit Dua         : " + unitDua);
-				System.out.println("Hasil konversi 2 : " + hasilKonversiUnitDua);
-				System.out.println("Unit Stok        : " + unitStok);
-				System.out.println("Aktif            : " + statusBarang);
-				System.out.println("--------------------------------------------");
+				listBarang.add(new Barang(kodeBarang, namaBarang, 
+										  unit1, hasilKonversiunit1, 
+										  unit2, hasilKonversiunit2, 
+										  unitStok, statusBarang));
 			}
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e);
 		}
+		return listBarang;
 	}
 
 	public void getAllBarangAktif() throws SQLException {

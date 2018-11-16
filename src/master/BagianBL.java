@@ -2,7 +2,7 @@ package master;
 
 import java.sql.SQLException;
 
-public class BlBagian {
+public class BagianBL {
 	
 	public void insertDataBagian(Bagian bagian) throws SQLException {
 		bagian.insertBagian();

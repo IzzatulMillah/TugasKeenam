@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2018 at 05:05 PM
+-- Generation Time: Nov 16, 2018 at 04:41 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1-log
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -42,6 +42,7 @@ CREATE TABLE `detail_permintaan_pembelian` (
 --
 
 INSERT INTO `detail_permintaan_pembelian` (`nomor_bon`, `kode_barang`, `jumlah_dipesan`, `unit`, `jumlah_total`, `unit_stok`) VALUES
+(1, 'FOOD0001', 3, 'kardus', 0, 'null'),
 (15112018, 'FOOD0001', 2, 'kardus', 100, 'piece');
 
 -- --------------------------------------------------------
@@ -67,7 +68,8 @@ INSERT INTO `master_bagian` (`kode_bagian`, `nama_bagian`) VALUES
 ('NET', 'Bagian Networking'),
 ('PROD', 'Bagian Produksi'),
 ('RT', 'Bagian Rumah Tangga'),
-('UANG', 'Bagian Keuangan');
+('UANG', 'Bagian Keuangan'),
+('ADMIN', 'Bagian Administrasi');
 
 -- --------------------------------------------------------
 
@@ -115,6 +117,9 @@ CREATE TABLE `permintaan_pembelian` (
 --
 
 INSERT INTO `permintaan_pembelian` (`nomor_bon`, `tanggal_bon`, `kode_bagian_peminta`, `keterangan`) VALUES
+(1, '2018-12-23', 'RT', 'segera'),
+(2, '2018-12-02', 'RT', ''),
+(3, '2018-09-23', 'UANG', 'Butuh ATK kit untuk pegawai Training'),
 (15112018, '2018-11-15', 'PROD', 'Bagian Produksi butuh pensil untuk bulan Desember.');
 
 --

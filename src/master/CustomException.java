@@ -1,14 +1,32 @@
 package master;
 
-public class CustomException extends Exception{
+public class CustomException extends Exception {
+	private String exception;
+	private String message;
+	private String status;
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	CustomException(String s) {
-		// TODO Auto-generated constructor stub
-		super(s);
+	public CustomException() {
+		super();
+		this.exception = "";
 	}
+	
+	public CustomException(String e) {
+		super();
+		this.exception = e;
+	}
+	
+	public CustomException(String status, String message) {
+		this.message = message;
+		this.status = status;
+	}
+	
+	@Override
+	public String getMessage() {
+		return this.exception;
+	}
+	
+	public String getStatus() {
+		return this.status;
+	}
+	
 }

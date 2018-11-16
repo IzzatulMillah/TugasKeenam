@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BagianDao {
 
@@ -11,15 +13,13 @@ public class BagianDao {
 
 	}
 	
-	public void getAllBagian() throws SQLException {
+	public List<Bagian> getAllBagian() throws SQLException {
 		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 		Connection connection = databaseConnection.getConnection();
+		List<Bagian> listBagian = new ArrayList<>();
 
 		Statement statement;
 		ResultSet resultSet;
-
-		String kodeBagian;
-		String namaBagian;
 
 		String sql = "SELECT * FROM master_bagian";
 
@@ -29,15 +29,37 @@ public class BagianDao {
 		resultSet = statement.executeQuery(sql);
 
 		while(resultSet.next()){
-			kodeBagian = resultSet.getString("kode_bagian");
-			namaBagian = resultSet.getString("nama_bagian");
+			String kodeBagian = resultSet.getString("kode_bagian");
+			String namaBagian = resultSet.getString("nama_bagian");
 
-			System.out.println("Kode Bagian      : " + kodeBagian);
-			System.out.println("Nama Bagian      : " + namaBagian);
-			System.out.println("--------------------------------------------");
+			listBagian.add(new Bagian(kodeBagian, namaBagian));
 		}
 		
 		statement.close();
 		resultSet.close();
+		
+		return listBagian;
+	}
+	
+	public boolean isKodeBagianExist() throws SQLException {
+		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+		Connection connection = databaseConnection.getConnection();
+		Statement statement;
+		ResultSet resultSet;
+
+		String sql = "SELECT permintaan_pembelian.kode_bagian_peminta " +
+					 "FROM permintaan_pembelian " +
+					 "WHERE permintaan_pembelian.kode_bagian_peminta " +
+					 		"AND EXISTS (SELECT master_bagian.kode_bagian " +
+					 		"FROM master_bagian " +
+					 		"WHERE permintaan_pembelian.kode_bagian_peminta = master_bagian.kode_bagian)";
+		
+		statement = connection.createStatement();
+		resultSet = statement.executeQuery(sql);
+		
+		while(resultSet.next()){
+			return true;
+		}
+		return false;
 	}
 }

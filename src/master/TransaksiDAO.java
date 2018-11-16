@@ -11,7 +11,7 @@ public class TransaksiDAO {
 
 	}
 	
-	public void getAllTransaksi() throws SQLException {
+	public ResultSet getAllTransaksi() throws SQLException {
 		DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 		Connection connection = databaseConnection.getConnection();
 
@@ -30,24 +30,7 @@ public class TransaksiDAO {
 		statement = connection.createStatement();
 		resultSet = statement.executeQuery(sql);
 
-		while(resultSet.next()){
-			int nomorBon = resultSet.getInt("permintaan_pembelian.nomor_bon");
-			String tanggalBon = resultSet.getString("permintaan_pembelian.tanggal_bon");
-			String kodeBagianPeminta = resultSet.getString("permintaan_pembelian.kode_bagian_peminta");
-			String keteranganBon = resultSet.getString("permintaan_pembelian.keterangan");
-			String kodeBarang = resultSet.getString("detail_permintaan_pembelian.kode_barang");
-			String jumlahDipesan = resultSet.getString("detail_permintaan_pembelian.jumlah_dipesan");
-			String unit = resultSet.getString("detail_permintaan_pembelian.unit");
-
-			System.out.println("Nomor Bon      : " + nomorBon);
-			System.out.println("Tanggal Bon    : " + tanggalBon);
-			System.out.println("Bagian Peminta : " + kodeBagianPeminta);
-			System.out.println("Kode Barang    : " + kodeBarang);
-			System.out.println("Jumlah dipesan : " + jumlahDipesan);
-			System.out.println("Unit           : " + unit);
-			System.out.println("Keterangan     : " + keteranganBon);
-			System.out.println("--------------------------------------------");
-		}
+		return resultSet;
 	}
 
 	public void getAllHeader() throws SQLException {
